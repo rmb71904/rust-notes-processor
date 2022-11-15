@@ -62,6 +62,5 @@ fn linechecker((c):(String)) {
 
 fn treemaker(incoming_array:Vec<[String; 2]>) {
     for array in incoming_array {
-        Vec::new();
     }
 }

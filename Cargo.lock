@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "text_analyzer"
+name = "rust-notes-processor"
 version = "0.1.0"
