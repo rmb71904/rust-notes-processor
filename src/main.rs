@@ -1,5 +1,5 @@
 #![allow(unused)]
-use std::{fs, path::{self, PathBuf, Path}, num::ParseIntError, borrow::Borrow, process::exit, ops::Index, ptr::eq, vec, array};
+use std::{fs, path::{self, PathBuf, Path}, num::ParseIntError, borrow::Borrow, process::exit, ops::{Index, Add}, ptr::eq, vec, array};
 use core::f32::consts::E;
 use core::num::IntErrorKind::InvalidDigit;
 fn main() {
@@ -52,15 +52,42 @@ fn linechecker((c):(String)) {
     for line in c.lines() {
         let layers:String = ((line.len() - line.trim().len())/4).to_string();
         let mut layer_and_text_arr = [layers, line.trim().to_string()];
-        //println!("{:?}", layer_and_text_arr);
         all_arrays.push(layer_and_text_arr);
     }
     //println!("{:?}", roots);
     //println!("{:?}", all_arrays)
-    treemaker(all_arrays);
+    search(all_arrays);
 }
 
-fn treemaker(incoming_array:Vec<[String; 2]>) {
-    for array in incoming_array {
-    }
+fn search(incoming_array:Vec<[String; 2]>) {
+    let mut all_lines;
+    let mut lines_vec = vec![];
+    for (index, elem) in incoming_array.iter().enumerate() {
+        //println!("{},{:?}", index, elem);
+        all_lines = LineInfo {
+            line_number: index.to_string().parse::<i32>().unwrap().add(1),
+            line_content: elem[1].clone(),
+            depth: elem[0].clone(),
+        };
+        lines_vec.push(all_lines);
+    };
+    println!("What were you looking for?");
+        let mut input2 = String::new();
+        std::io::stdin()
+            .read_line(&mut input2)
+            .expect("can not read user input");
+    for n in lines_vec {
+        if n.iter().any(|&i| i==input2) {
+            println!("yes")
+        }
+        else {}
+        }
+}
+
+#[derive(Debug)]
+struct LineInfo 
+{
+    line_number: i32,
+    line_content: String,
+    depth: String
 }
